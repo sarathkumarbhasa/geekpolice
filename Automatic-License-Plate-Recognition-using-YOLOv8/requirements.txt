@@ -1,6 +1,6 @@
 ultralytics==8.0.114
 pandas
-opencv-python
+opencv-python-headless
 numpy
 scipy
 easyocr
