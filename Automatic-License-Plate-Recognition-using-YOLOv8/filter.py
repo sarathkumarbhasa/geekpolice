@@ -1,0 +1,64 @@
+import pandas as pd
+import os
+
+def filter_csv(file_path):
+    if not os.path.exists(file_path):
+        print(f"File {file_path} not found. Skipping.")
+        return
+
+    print(f"Filtering {file_path}...")
+    try:
+        # Use on_bad_lines='skip' to handle corrupted rows if they exist
+        df = pd.read_csv(file_path, on_bad_lines='skip', engine='python')
+        
+        # 1. Initial cleanup: Remove rows where region is 'Unknown' or plate is too short
+        df = df[df['region'] != 'Unknown']
+        df = df[df['license_number'].astype(str).str.len() >= 7]
+        
+        if df.empty:
+            print("No valid detections found after initial filtering.")
+            return
+
+        # 2. Aggregation Logic (One entry per unique car)
+        # We want to pick the most reliable data for each vehicle
+        def get_best_info(group):
+            # Pick the most frequent license number (voting)
+            best_plate = group['license_number'].mode().iloc[0]
+            # Pick the most frequent region
+            best_region = group['region'].mode().iloc[0]
+            # Get the earliest timestamp
+            first_seen = group['timestamp'].min()
+            # Get the lane (mode or first)
+            best_lane = group['lane'].mode().iloc[0]
+            # Average speed (if available)
+            avg_speed = group['speed'].mean() if group['speed'].dtype != object else group['speed'].iloc[0]
+            
+            return pd.Series({
+                'timestamp': first_seen,
+                'license_number': best_plate,
+                'lane': best_lane,
+                'speed': avg_speed,
+                'region': best_region
+            })
+
+        # Group by car_id and apply the logic
+        final_df = df.groupby('car_id').apply(get_best_info).reset_index()
+        
+        print(f"Original detections: {len(df)}")
+        print(f"Unique vehicles identified: {len(final_df)}")
+        
+        output_name = "filter.csv"
+        final_df.to_csv(output_name, index=False)
+        print(f"Successfully created clean report: {output_name}")
+        
+    except Exception as e:
+        print(f"Error processing {file_path}: {e}")
+
+if __name__ == "__main__":
+    # Prioritize camera.csv if it exists, otherwise use test.csv
+    if os.path.exists('camera.csv'):
+        filter_csv('camera.csv')
+    elif os.path.exists('test.csv'):
+        filter_csv('test.csv')
+    else:
+        print("Neither camera.csv nor test.csv found in the current directory.")

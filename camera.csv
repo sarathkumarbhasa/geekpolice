@@ -1,0 +1,8 @@
+car_id,timestamp,license_number,lane,speed,region
+Standalone_84_0,2026-04-07 12:25:03,1209,Lane 1,0,Unknown
+Standalone_87_1,2026-04-07 12:25:04,2091,Lane 1,0,Unknown
+Standalone_95_1,2026-04-07 12:25:07,2091,Lane 1,0,Unknown
+Standalone_116_0,2026-04-07 12:25:12,1209,Lane 1,0,Unknown
+Standalone_228_0,2026-04-07 12:25:37,1204,Lane 3,0,Unknown
+Standalone_231_2,2026-04-07 12:25:38,1209,Lane 3,0,Unknown
+Standalone_242_0,2026-04-07 12:25:40,AP3Y,Lane 2,0,Andhra Pradesh

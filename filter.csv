@@ -1,0 +1,9 @@
+car_id,timestamp,license_number,lane,speed,region
+Standalone_11_0,2026-04-07 12:01:11,RJ42CV0002,Lane 2,0.0,Rajasthan
+Standalone_12_0,2026-04-07 12:01:12,RJ1ZCV00027,Lane 2,0.0,Rajasthan
+Standalone_13_0,2026-04-07 12:01:12,RJTZCV0002,Lane 2,0.0,Rajasthan
+Standalone_13_1,2026-04-07 12:01:12,RJ1ZCV0002,Lane 2,0.0,Rajasthan
+Standalone_14_0,2026-04-07 12:01:13,RJIZCVOOO2,Lane 1,0.0,Rajasthan
+Standalone_15_0,2026-04-07 12:01:13,RJAZCV0002,Lane 1,0.0,Rajasthan
+Standalone_16_0,2026-04-07 12:01:13,RJIZCVO0027,Lane 1,0.0,Rajasthan
+Standalone_17_0,2026-04-07 12:01:14,RJAZCV0002,Lane 1,0.0,Rajasthan
