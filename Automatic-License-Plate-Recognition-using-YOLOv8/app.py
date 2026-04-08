@@ -1,4 +1,14 @@
 import streamlit as st
+import os
+import sys
+
+# Streamlit Cloud deployment patch for OpenCV
+try:
+    import cv2
+except ImportError:
+    os.system(f"{sys.executable} -m pip uninstall -y opencv-python opencv-python-headless")
+    os.system(f"{sys.executable} -m pip install opencv-python-headless")
+    
 import cv2
 import numpy as np
 import tempfile
