@@ -68,7 +68,7 @@ def load_models():
     torch.load = safe_load
     
     coco_model = YOLO('yolov8n.pt')
-    license_plate_detector = YOLO(r'C:\Users\sarat\OneDrive\Desktop\geekpolice\Automatic-License-Plate-Recognition-using-YOLOv8\license_plate_detector.pt')
+    license_plate_detector = YOLO('license_plate_detector.pt')
     return coco_model, license_plate_detector
 
 coco_model, license_plate_detector = load_models()
